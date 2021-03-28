@@ -1,105 +1,76 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
+
+void begin_inerst();
+void crea_node();
+void prin_node();
 
 struct node
 {
-    int n1;
+    int data;
     struct node *next;
-};
-struct node *head=NULL;
+}*head;
 
-void insert_node(int n2);
-void begin_node(int new_data);
-void display();
 
-void insert_node(int n2)
+void crea_node()
 {
-    struct node *new_node;
+    char choice; int data1;
     struct node *temp;
-    int num;
-    head = (struct node *)malloc(sizeof(struct node));
-    if(head == NULL)
+    do
     {
-        cout<<" Memory can not be allocated";
-    }
-    else
-    {
-
-        cout<<"\nEnter the data for node 1: ";
-        cin>>num;
-        head-> n1 = num;
-        head-> next = NULL; //Links the address field to NULL
-        temp = head;
-
-    for(int i=2; i<=n2; i++)
+        struct node *newnode=(struct node*)malloc(sizeof(struct node *));
+        std::cout << "Enter the data" << std::endl; std::cin >> data1;
+        newnode->data=data1;
+        newnode->next=NULL;
+        if(head==NULL)
         {
-    new_node= (struct node*)malloc(sizeof(struct node));
-    if(new_node==NULL)
-    {
-        cout<<" Memory can not be allocated";
-                break;
-    }
-    else
-    {
-        cout<<"Enter the data for node "<<i<<": "; // Entering data in nodes.
-        cin>>num;
-        new_node->n1=num;
-        new_node->next=NULL;
-        temp->next=new_node;
-        temp=new_node;
-    }
-    }
-}
+          head=newnode;
+          temp=newnode;
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+     std::cout << "Do you want to add the list (y/Y)"  << std::endl;
+     std::cin >> choice;
+    }while(choice=='y' || choice=='Y');
 }
 
-void begin_node(int new_data)
+void prin_node()
 {
-    struct node *newnode= (struct node*)malloc(sizeof(struct node));
-    if(newnode==NULL)
+    struct node *temp;
+    temp=head;
+    if(temp==NULL)
     {
-        cout<<" Memory can not be allocated";
+        std::cout << "Node is empty" << std::endl;
     }
     else
     {
-    newnode->n1=new_data;
-    newnode->next=head;
-    head=newnode;
+        std::cout << "The nodes are given below :" << std::endl;
+        while(temp!=NULL)
+        {
+            std::cout << temp->data << std::endl;
+            temp=temp->next;
+        }
     }
 }
 
-void display(){
-    struct node *temp;
-    int count=0;
-    if(head == NULL)
-    {
-        cout<<" No data found in the list";
-    }
-    else
-    {
-        temp= head;
-        cout<<"Linked List: ";
-        while(temp!=0)
-            {
-                count++;
-                cout<<temp->n1<<" ";
-                temp=temp->next;
-                }
-}
-cout<<"\nNumber of nodes in a list:"<<count<<endl;
+void begin_inerst()
+{
+    int data2;
+    struct node *newnode1=(struct node*)malloc(sizeof(struct node *));
+        std::cout << "Enter the data at begining" << std::endl; 
+        std::cin >> data2;
+        newnode1->data=data2;
+        newnode1->next=head;
+        head=newnode1;
 }
 
 int main()
 {
-    int n,num;
-    cout<<"\nEnter the number of nodes: ";
-    cin>>n;
-    insert_node(n);
-    cout<<"\nLinked list data: \n";
-    display();
-    cout<<"\nEnter data you want to insert at the beginning: ";
-    cin>>num;
-    begin_node(num);
-    cout<<"\nLinked list after insertion: \n";
-    display();
-    return 0;
+    crea_node(); // 5  6
+    prin_node(); // 5 6
+    begin_inerst();// 2 5 6
+    prin_node();
 }
