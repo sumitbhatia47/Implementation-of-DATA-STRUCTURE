@@ -1,84 +1,63 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
+
+void crea_node();
+void prin_node();
 
 struct node
 {
-    int n1;
+    int data;
     struct node *next;
-};
-struct node *head=NULL;
+}*head;
 
-void insert_node(int n2);
-void display();
 
-void insert_node(int n2)
+void crea_node()
 {
-    struct node *new_node;
+    char choice; int data1;
     struct node *temp;
-    int num;
-    head = (struct node *)malloc(sizeof(struct node));
-    if(head == NULL)
+    do
     {
-        cout<<" Memory can not be allocated";
-    }
-    else
-    {
-
-        cout<<"\nEnter the data for node 1: ";
-        cin>>num;
-        head-> n1 = num;
-        head-> next = NULL;
-        temp = head;
-
-    for(int i=2; i<=n2; i++)
+        struct node *newnode=(struct node*)malloc(sizeof(struct node *));
+        std::cout << "Enter the data" << std::endl; std::cin >> data1;
+        newnode->data=data1;
+        newnode->next=NULL;
+        if(head==NULL)
         {
-    new_node= (struct node*)malloc(sizeof(struct node));
-    if(new_node==NULL)
-    {
-        cout<<" Memory can not be allocated";
-                break;
-    }
-    else
-    {
-        cout<<"Enter the data for node "<<i<<": ";
-        cin>>num;
-        new_node->n1=num;
-        new_node->next=NULL;
-        temp->next=new_node;
-        temp=new_node;
-    }
-    }
-}
+          head=newnode;
+          temp=newnode;
+          //std::cout << "Overflow" << std::endl;
+        }
+        else
+        {
+            temp->next=newnode;
+            temp=newnode;
+        }
+     std::cout << "Do you want to add the list (y/Y)"  << std::endl;
+     std::cin >> choice;
+    }while(choice=='y' || choice=='Y');
 }
 
-void display(){
+void prin_node()
+{
     struct node *temp;
-    int count=0;
-    if(head == NULL)
+    temp=head;
+    if(temp==NULL)
     {
-        cout<<" No data found in the list";
+        std::cout << "Node is empty" << std::endl;
     }
     else
     {
-        temp= head;
-        cout<<"Linked List: ";
-        while(temp!=0)
-            {
-                count++;
-                cout<<temp->n1<<" ";
-                temp=temp->next;
-                }
-}
-cout<<"\n Total Number of nodes in a list:"<<count<<endl;
+        std::cout << "The nodes are given below :" << std::endl;
+        while(temp!=NULL)
+        {
+            std::cout << temp->data << std::endl;
+            temp=temp->next;
+        }
+    }
 }
 
 int main()
 {
-    int n,i;
-    cout<<"Enter the number of nodes: ";
-    cin>>n;
-    insert_node(n);
-    cout<<"\nLinked list data: \n";
-    display();
-    return 0;
+    crea_node(); // 5  6
+    prin_node(); // 5 6
 }
