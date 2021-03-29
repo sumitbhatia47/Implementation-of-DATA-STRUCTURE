@@ -4,7 +4,7 @@ using namespace std;
 void begin_inerst();
 void crea_node();
 void prin_node();
-void end_node();
+
 struct node
 {
     int data;
@@ -67,31 +67,10 @@ void begin_inerst()
         head=newnode1;
 }
 
-void end_node()
-{
-    char choice;
-    struct node *temp;
-int newdata;
-do{
-struct node *newnode=(struct node*)malloc(sizeof(struct node*));
-cout<<"Enter the data at an ending :" <<endl; cin>>newdata;
-newnode->data=newdata;
-temp =head;
-while(temp->next!=NULL)
-{
-temp=temp->next;
-}
-temp->next=newnode;
-newnode->next=NULL;
-std::cout << "Do you want to add the node at an ending (y/Y) ?" << std::endl;
-cin>>choice;
-}while(choice=='y' || choice=='Y');
-}
-
 int main()
 {
     crea_node(); // 5  6
     prin_node(); // 5 6
-    end_node();// 2 5 6
+    begin_inerst();// 2 5 6
     prin_node();
 }
