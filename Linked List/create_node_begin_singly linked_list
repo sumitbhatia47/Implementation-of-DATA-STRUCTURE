@@ -4,7 +4,7 @@ using namespace std;
 void begin_inerst();
 void crea_node();
 void prin_node();
-
+void end_node();
 struct node
 {
     int data;
@@ -19,7 +19,7 @@ void crea_node()
     do
     {
         struct node *newnode=(struct node*)malloc(sizeof(struct node *));
-        std::cout << "Enter the data" << std::endl; std::cin >> data1;
+        std::cout << "Enter the data :" << std::endl; std::cin >> data1;
         newnode->data=data1;
         newnode->next=NULL;
         if(head==NULL)
@@ -32,7 +32,7 @@ void crea_node()
             temp->next=newnode;
             temp=newnode;
         }
-     std::cout << "Do you want to add the list (y/Y)"  << std::endl;
+     std::cout << "Do you want to add the node in the list (y/Y) :"  << std::endl;
      std::cin >> choice;
     }while(choice=='y' || choice=='Y');
 }
@@ -43,7 +43,7 @@ void prin_node()
     temp=head;
     if(temp==NULL)
     {
-        std::cout << "Node is empty" << std::endl;
+        std::cout << "Node is empty." << std::endl;
     }
     else
     {
@@ -60,17 +60,38 @@ void begin_inerst()
 {
     int data2;
     struct node *newnode1=(struct node*)malloc(sizeof(struct node *));
-        std::cout << "Enter the data at begining" << std::endl; 
+        std::cout << "Enter the data at begining :" << std::endl; 
         std::cin >> data2;
         newnode1->data=data2;
         newnode1->next=head;
         head=newnode1;
 }
 
+void end_node()
+{
+    char choice;
+    struct node *temp;
+int newdata;
+do{
+struct node *newnode=(struct node*)malloc(sizeof(struct node*));
+cout<<"Enter the data at an ending :" <<endl; cin>>newdata;
+newnode->data=newdata;
+temp =head;
+while(temp->next!=NULL)
+{
+temp=temp->next;
+}
+temp->next=newnode;
+newnode->next=NULL;
+std::cout << "Do you want to add the node at an ending (y/Y) ?" << std::endl;
+cin>>choice;
+}while(choice=='y' || choice=='Y');
+}
+
 int main()
 {
     crea_node(); // 5  6
     prin_node(); // 5 6
-    begin_inerst();// 2 5 6
+    end_node();// 2 5 6
     prin_node();
 }
